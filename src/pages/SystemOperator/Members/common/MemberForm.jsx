@@ -26,70 +26,42 @@ const MemberForm = ({ data }) => {
   const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
 
   const [name, setName] = useState(data?.name ?? "");
-  const [firstNameEn, setFirstNameEn] = useState(data?.firstNameEn ?? "");
-  const [lastNameEn, setLastNameEn] = useState(data?.lastNameEn ?? "");
-  const [nickname, setNickname] = useState(data?.nickname ?? "");
-  const [textbook, setTextbook] = useState(data?.textbook ?? "");
   const [loginId, setLoginId] = useState(data?.loginId ?? "");
   const [email, setEmail] = useState(data?.email ?? "");
   const [isReceiveEmail, setIsReceiveEmail] = useState(data?.isReceiveEmail ?? true);
   const [password, setPassword] = useState("");
   const [gender, setGender] = useState(data?.gender ?? "");
-  const [phone, setPhone] = useState(data?.phone ?? "");
-  const [phoneType, setPhoneType] = useState(data?.phoneType ?? "H");
   const [cellPhone, setCellPhone] = useState(data?.cellPhone ?? "");
   const [isReceiveSms, setIsReceiveSms] = useState(data?.isReceiveSms ?? true);
   const [isOfficeWorker, setIsOfficeWorker] = useState(data?.isOfficeWorker ?? true);
-  const [company, setCompany] = useState(data?.company ?? "");
-  const [position, setPosition] = useState(data?.position ?? "");
   const [note, setNote] = useState(data?.note ?? "");
-  const [lessonInfo, setLessonInfo] = useState(data?.lessonInfo ?? "");
   const [isActive, setIsActive] = useState(data?.active ?? true);
   const [zipcode, setZipcode] = useState(data?.zipcode ?? "");
   const [address, setAddress] = useState(data?.address ?? "");
   const [detailedAddress, setDetailedAddress] = useState(data?.detailedAddress ?? "");
-  const [addressType, setAddressType] = useState(data?.addressType ?? "H");
-  const [joinPath, setJoinPath] = useState(data?.joinPath ?? "ALL");
   const [languages, setLanguages] = useState(data?.languages ?? []);
   const [etcLanguage, setEtcLanguage] = useState(data?.etcLanguage ?? "");
   const [languageSkills, setLanguageSkills] = useState(data?.languageSkills ?? []);
-  const [foreignCountry, setForeignCountry] = useState(data?.foreignCountry ?? "");
-  const [foreignPeriod, setForeignPeriod] = useState(data?.foreignPeriod ?? "");
-  const [foreignPurpose, setForeignPurpose] = useState(data?.foreignPurpose ?? "");
   const [coursePurposes, setCoursePurposes] = useState(data?.coursePurposes || []);
 
   const reset = () => {
     setName(data?.name ?? "");
-    setFirstNameEn(data?.firstNameEn ?? "");
-    setLastNameEn(data?.lastNameEn ?? "");
-    setNickname(data?.nickname ?? "");
-    setTextbook(data?.textbook ?? "");
     setLoginId(data?.loginId ?? "");
     setEmail(data?.email ?? "");
     setIsReceiveEmail(data?.isReceiveEmail ?? true);
     setPassword("");
     setGender(data?.gender ?? "");
-    setPhone(data?.phone ?? "");
-    setPhoneType(data?.phoneType ?? "H");
     setCellPhone(data?.cellPhone ?? "");
     setIsReceiveSms(data?.isReceiveSms ?? true);
     setIsOfficeWorker(data?.isOfficeWorker ?? "Y");
-    setCompany(data?.company ?? "");
-    setPosition(data?.position ?? "");
     setNote(data?.note ?? "");
-    setLessonInfo(data?.lessonInfo ?? "");
     setIsActive(data?.active ?? true);
     setZipcode(data?.zipcode ?? "");
     setAddress(data?.address ?? "");
     setDetailedAddress(data?.detailedAddress ?? "");
-    setAddressType(data.addressType ?? "");
-    setJoinPath(data.joinPath ?? "ALL");
     setLanguages(data.languages ?? []);
     setEtcLanguage(data.etcLanguage ?? "");
     setLanguageSkills(data.languageSkills ?? []);
-    setForeignCountry(data.foreignCountry ?? "");
-    setForeignPeriod(data.foreignPeriod ?? "");
-    setForeignPurpose(data.foreignPurpose ?? "");
     setCoursePurposes(data.coursePurposes ?? []);
   };
 
@@ -107,9 +79,7 @@ const MemberForm = ({ data }) => {
       return;
     }
 
-    const saveLanguageSkill = languageSkills.filter(
-      (item) => item.languageTest !== null && item.score !== 'null'
-    );
+
 
     let saveLanguages = languages;
     if (etcLanguage) {
@@ -118,36 +88,18 @@ const MemberForm = ({ data }) => {
 
     const saveData = {
       name,
-      firstNameEn,
-      lastNameEn,
-      nickname,
-      textbook,
       loginId,
       email,
       isReceiveEmail,
       password,
       gender,
-      phone,
-      phoneType,
       cellPhone,
       isReceiveSms,
       isOfficeWorker,
-      company,
-      position,
       note,
-      lessonInfo,
       isActive,
-      zipcode,
       address,
       detailedAddress,
-      addressType,
-      joinPath,
-      languages: saveLanguages,
-      etcLanguage,
-      languageSkills: saveLanguageSkill,
-      foreignCountry,
-      foreignPeriod,
-      foreignPurpose,
       coursePurposes,
       type: "S",
     };
@@ -420,51 +372,7 @@ const MemberForm = ({ data }) => {
                 {!forRegister && <span>{data?.id}</span>}
               </td>
             </tr>
-            <tr>
-              <th>
-                영문이름 <small>(이름+성)</small>
-              </th>
-              <td>
-                <input
-                  type="text"
-                  className="input-init"
-                  placeholder="First Name"
-                  value={firstNameEn}
-                  onChange={(e) => setFirstNameEn(e.target.value)}
-                />{" "}
-                <input
-                  type="text"
-                  className="input-init"
-                  placeholder="Last Name"
-                  value={lastNameEn}
-                  onChange={(e) => setLastNameEn(e.target.value)}
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>닉네임</th>
-              <td>
-                <input
-                  type="text"
-                  className="input-init"
-                  placeholder="닉네임"
-                  value={nickname}
-                  onChange={(e) => setNickname(e.target.value)}
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>교재</th>
-              <td>
-                <input
-                  type="text"
-                  className="input-init"
-                  placeholder="교재"
-                  value={textbook}
-                  onChange={(e) => setTextbook(e.target.value)}
-                />
-              </td>
-            </tr>
+
             <tr>
               <th>
                 아이디 <i className="require">*</i>
@@ -562,47 +470,6 @@ const MemberForm = ({ data }) => {
               </td>
             </tr>
             <tr>
-              <th>유선전화</th>
-              <td>
-                <div className="flexYCenter-inline gap-10">
-                  <input
-                    type="tel"
-                    className="input-init"
-                    placeholder="숫자입력"
-                    style={{ width: 124 }}
-                    value={phone}
-                    // onChange={(e) => makePhoneNumber(e.target.value, setPhone)}
-                    onChange={(e) => setPhone(e.target.value)}
-                  />
-
-                  <div className="ui-radio-group small">
-                    <div>
-                      <input
-                        type="radio"
-                        name="phone"
-                        id="home"
-                        value="H"
-                        checked={phoneType === "H"}
-                        onChange={(e) => setPhoneType(e.target.value)}
-                      />
-                      <label htmlFor="home">자택</label>
-                    </div>
-                    <div>
-                      <input
-                        type="radio"
-                        name="phone"
-                        id="company"
-                        value="C"
-                        checked={phoneType === "C"}
-                        onChange={(e) => setPhoneType(e.target.value)}
-                      />
-                      <label htmlFor="company">직장</label>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
               <th>
                 HP <i className="require">*</i>
               </th>
@@ -660,30 +527,7 @@ const MemberForm = ({ data }) => {
                 </div>
               </td>
             </tr>
-            <tr>
-              <th>직장/학교</th>
-              <td>
-                <input
-                  type="text"
-                  className="input-init"
-                  placeholder="직장/학교"
-                  value={company}
-                  onChange={(e) => setCompany(e.target.value)}
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>직책/학과</th>
-              <td>
-                <input
-                  type="text"
-                  className="input-init"
-                  placeholder="직책/학과"
-                  value={position}
-                  onChange={(e) => setPosition(e.target.value)}
-                />
-              </td>
-            </tr>
+    
             <tr>
               <th>특이사항</th>
               <td>
@@ -697,20 +541,7 @@ const MemberForm = ({ data }) => {
                 ></textarea>
               </td>
             </tr>
-            <tr>
-              <th>학습정보</th>
-              <td>
-                <textarea
-                  style={{ whiteSpace: "pre-wrap" }}
-                  className="input-init full"
-                  rows="7"
-                  value={lessonInfo}
-                  defaultValue={lessonInfo}
-                  onChange={(e) => setLessonInfo(e.target.value)}
-                ></textarea>
-              </td>
-            </tr>
-
+  
             {forRegister ? (
               <></>
             ) : (
@@ -770,7 +601,7 @@ const MemberForm = ({ data }) => {
               <span className={`${isExpanded ? "tf-rotate" : ""}`}>
                 <i className="fa-solid fa-circle-chevron-down txt-secondary"></i>
               </span>
-              <span className="size-bodyS">상세검색</span>
+              <span className="size-bodyS">상세보기</span>
             </span>
           </Buttons>
         </div>
@@ -815,211 +646,7 @@ const MemberForm = ({ data }) => {
                 </div>
               </td>
             </tr>
-            <tr>
-              <th>가입경로</th>
-              <td>
-                <select
-                  className="input-init"
-                  value={joinPath || "ALL"}
-                  onChange={({ target: { value } }) => setJoinPath(value)}
-                >
-                  <option value="ALL">-선택-</option>
-                  <option value="SIGN">간판</option>
-                  <option value="ONLINE">온라인검색</option>
-                  <option value="RECOMMEND">지인추천</option>
-                  <option value="FAN">부채</option>
-                  <option value="LEAFLET">3단리플릿</option>
-                  <option value="SUBWAY">지하철광고</option>
-                  <option value="ALLIANCE">기업제휴</option>
-                  <option value="ETC">기타</option>
-                </select>
-              </td>
-            </tr>
-            <tr>
-              <th>학습희망언어</th>
-              <td>
-                <div className="ui-check full">
-                  <div className="check">
-                    <input
-                      type="checkbox"
-                      className="input-init"
-                      id="EN"
-                      onChange={() => onClickLanguage("EN")}
-                      checked={onCheckLanguage("EN")}
-                    />
-                    <label htmlFor="EN">영어</label>
-                  </div>
-                  <div className="check">
-                    <input
-                      type="checkbox"
-                      className="input-init"
-                      id="CN"
-                      onChange={() => onClickLanguage("CN")}
-                      checked={onCheckLanguage("CN")}
-                    />
-                    <label htmlFor="CN">중국어</label>
-                  </div>
-                  <div className="check">
-                    <input
-                      type="checkbox"
-                      className="input-init"
-                      id="JP"
-                      onChange={() => onClickLanguage("JP")}
-                      checked={onCheckLanguage("JP")}
-                    />
-                    <label htmlFor="JP">일본어</label>
-                  </div>
-                  <div className="check">
-                    <input
-                      type="checkbox"
-                      className="input-init"
-                      id="KR"
-                      onChange={() => onClickLanguage("KR")}
-                      checked={onCheckLanguage("KR")}
-                    />
-                    <label htmlFor="KR">한국어</label>
-                  </div>
-                  <div className="check flex1">
-                    <label htmlFor="etcLanguage">기타 : </label>
-
-                    <input
-                      type="text"
-                      id="etcLanguage"
-                      className="input-init full"
-                      value={etcLanguage}
-                      onChange={({ target: { value } }) => setEtcLanguage(value)}
-                    />
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th>외국어실력</th>
-              <td>
-                <div className="ui-detail-list">
-                  <div className="label">TOEIC</div>
-                  <div className="cont">
-                    <select
-                      className="input-init"
-                      value={getLanguageSkillScore("TOEIC")}
-                      onChange={({ target: { value } }) => onChangeLanguageSkills("TOEIC", value)}
-                    >
-                      <option value="">-선택-</option>
-                      <option value="900점이상">900점이상</option>
-                      <option value="800-900점">800-900점</option>
-                      <option value="600-800점">600-800점</option>
-                      <option value="500-600점">500-600점</option>
-                      <option value="490점이하">490점이하</option>
-                    </select>
-                  </div>
-                  <div className="label">TOEIC-S</div>
-                  <div className="cont">
-                    <select
-                      className="input-init"
-                      value={getLanguageSkillScore("TOEIC_S")}
-                      onChange={({ target: { value } }) => onChangeLanguageSkills("TOEIC_S", value)}
-                    >
-                      <option value="">-선택-</option>
-                      <option value="8(190-200)">8(190-200)</option>
-                      <option value="7(160-180)">7(160-180)</option>
-                      <option value="6(130-150)">6(130-150)</option>
-                      <option value="5(110-120)">5(110-120)</option>
-                      <option value="4(80-100)">4(80-100)</option>
-                      <option value="3(60-70)">3(60-70)</option>
-                      <option value="1,2(0-50)">1,2(0-50)</option>
-                    </select>
-                  </div>
-                  <div className="label">OPIc</div>
-                  <div className="cont">
-                    <select
-                      className="input-init"
-                      value={getLanguageSkillScore("OPIC")}
-                      onChange={({ target: { value } }) => onChangeLanguageSkills("OPIC", value)}
-                    >
-                      <option value="">-선택-</option>
-                      <option value="AD">AD</option>
-                      <option value="IH">IH</option>
-                      <option value="IM">IM</option>
-                      <option value="IL">IL</option>
-                      <option value="NH">NH</option>
-                      <option value="NM">NM</option>
-                      <option value="NL">NL</option>
-                    </select>
-                  </div>
-                  <div className="label">TSC</div>
-                  <div className="cont">
-                    <input
-                      type="text"
-                      className="input-init full"
-                      value={getLanguageSkillScore("TSC")}
-                      onChange={({ target: { value } }) => onChangeLanguageSkills("TSC", value)}
-                    />
-                  </div>
-                  <div className="label">HKC</div>
-                  <div className="cont">
-                    <input
-                      type="text"
-                      className="input-init full"
-                      value={getLanguageSkillScore("HKC")}
-                      onChange={({ target: { value } }) => onChangeLanguageSkills("HKC", value)}
-                    />
-                  </div>
-                  <div className="label">SJPT</div>
-                  <div className="cont">
-                    <input
-                      type="text"
-                      className="input-init full"
-                      value={getLanguageSkillScore("SJPT")}
-                      onChange={({ target: { value } }) => onChangeLanguageSkills("SJPT", value)}
-                    />
-                  </div>
-                  <div className="label">기타</div>
-
-                  <div className="cont span">
-                    <input
-                      type="text"
-                      className="input-init full"
-                      value={getLanguageSkillScore("ETC")}
-                      onChange={({ target: { value } }) => onChangeLanguageSkills("ETC", value)}
-                    />
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th>외국거주경험</th>
-              <td>
-                <div className="ui-detail-list">
-                  <div className="label">국가명</div>
-                  <div className="cont">
-                    <input
-                      type="text"
-                      className="input-init full"
-                      value={foreignCountry}
-                      onChange={({ target: { value } }) => setForeignCountry(value)}
-                    />
-                  </div>
-                  <div className="label">기간</div>
-                  <div className="cont">
-                    <input
-                      type="text"
-                      className="input-init full"
-                      value={foreignPeriod}
-                      onChange={({ target: { value } }) => setForeignPeriod(value)}
-                    />
-                  </div>
-                  <div className="label">목적</div>
-                  <div className="cont span">
-                    <input
-                      type="text"
-                      className="input-init full"
-                      value={foreignPurpose}
-                      onChange={({ target: { value } }) => setForeignPurpose(value)}
-                    />
-                  </div>
-                </div>
-              </td>
-            </tr>
+      
             <tr>
               <th>수강의 목적</th>
               <td>
