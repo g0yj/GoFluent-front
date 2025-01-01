@@ -1,0 +1,281 @@
+@use "./utile" as *;
+
+// fonts
+// font pretendard
+@font-face {
+  font-family: "Helvetica";
+  font-weight: 800;
+  font-display: swap;
+  src: local("Helvetica Bold"), url("/assets/font/Helvetica-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 800;
+  font-display: swap;
+  src: local("Pretendard ExtraBold"), url("/assets/font/Pretendard-ExtraBold.woff2") format("woff2"),
+    url("/assets/font/Pretendard-ExtraBold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 700;
+  font-display: swap;
+  src: local("Pretendard Bold"), url("/assets/font/Pretendard-Bold.woff2") format("woff2"),
+    url("/assets/font/Pretendard-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 600;
+  font-display: swap;
+  src: local("Pretendard SemiBold"), url("/assets/font/Pretendard-SemiBold.woff2") format("woff2"),
+    url("/assets/font/Pretendard-SemiBold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 500;
+  font-display: swap;
+  src: local("Pretendard Medium"), url("/assets/font/Pretendard-Medium.woff2") format("woff2"),
+    url("/assets/font/Pretendard-Medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 400;
+  font-display: swap;
+  src: local("Pretendard Regular"), url("/assets/font/Pretendard-Regular.woff2") format("woff2"),
+    url("/assets/font/Pretendard-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "fontawesome regular";
+  font-weight: 400;
+  font-display: swap;
+  src: url("@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "fontawesome solid";
+  font-weight: 900;
+  font-display: swap;
+  src: url("@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Gothic";
+  font-weight: normal;
+  font-display: swap;
+  src: url("/assets/font/NanumGothic.woff") format("woff");
+}
+
+html,
+body {
+  // default
+  font-family: "Gothic", arial, sans-serif;
+  font-size: var(--bodyXS);
+  color: var(--black);
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+
+  .helvetica {
+    font-family: "Helvetica";
+  }
+
+  .size-small {
+    font-size: var(--bodyXS) !important;
+  }
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+img {
+  max-width: 100%;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: border-box;
+
+  &:focus-visible {
+    outline: 0;
+  }
+}
+
+strong {
+  font-weight: inherit;
+
+  &.m {
+    font-weight: 500;
+  }
+  &.sb {
+    font-weight: 600;
+  }
+  &.b {
+    font-weight: 700;
+  }
+  &.eb {
+    font-weight: 800;
+  }
+}
+
+i {
+  font-style: normal;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+button {
+  padding: 0px;
+  border: none;
+  background-color: unset;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  cursor: pointer;
+}

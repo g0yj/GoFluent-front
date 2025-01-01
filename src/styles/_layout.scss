@@ -1,0 +1,267 @@
+@use "./utile" as *;
+
+#root {
+  height: 100vh;
+}
+
+.layout-contents-wrap {
+  @include flexColumn;
+  height: 100%;
+}
+.page-main-wrap {
+  @include flex;
+
+  &,
+  & > .lib-split {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.layout-contents-width {
+  min-width: 600px;
+  max-width: 700px;
+  padding-bottom: 20px;
+}
+
+// common
+// margin/padding
+@for $i from 1 to 50 {
+  .sp-mt-#{$i} {
+    margin-top: #{$i}px !important;
+  }
+  .sp-mb-#{$i} {
+    margin-bottom: #{$i}px !important;
+  }
+}
+.ml-auto {
+  margin-left: auto;
+}
+.mr-auto {
+  margin-right: auto;
+}
+
+// flex
+.flex {
+  @include flex;
+}
+.flexBetween {
+  @include flexBetween;
+}
+.flexYCenter {
+  @include flexYCenter;
+}
+.flexYCenter-inline {
+  @include flexYCenter {
+    display: inline-flex;
+  }
+}
+.flexCenter {
+  @include flexCenter;
+}
+.flexColumn {
+  @include flex($direction: column);
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.flex1 {
+  flex: 1;
+}
+.flex-none {
+  flex: none;
+}
+// flex variation
+.layout-flex {
+  &,
+  & > div {
+    @include flexYCenter {
+      gap: 10px;
+    }
+
+    &.gap-s {
+      gap: 5px;
+    }
+  }
+}
+.layout-between {
+  @include layoutBetween;
+
+  & > div {
+    @include flexYCenter;
+
+    &:not([class*="gap"]) {
+      gap: 10px;
+    }
+
+    &.gap-s {
+      gap: 5px;
+    }
+  }
+}
+.layout-nodeWrap {
+  flex: 1;
+  min-width: 100%;
+}
+.layout-node-flex1 {
+  & > * {
+    flex: 1;
+  }
+}
+
+// res flex
+.res-flex {
+  @include flex;
+}
+
+.gap {
+  gap: 5px;
+}
+.gap-10 {
+  gap: 10px;
+}
+.gap-20 {
+  gap: 20px;
+}
+.gap-30 {
+  gap: 30px;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.spacer-x {
+  margin: 0 auto;
+}
+
+.spacer-y {
+  margin: auto 0;
+}
+
+// contents
+// header
+.ui-header-wrap {
+  @include flexBetween;
+  box-shadow: var(--z4);
+  border-bottom: 1px solid var(--grey300);
+  background-color: var(--grey900);
+
+  & > div {
+    @include flexYCenter;
+  }
+
+  .ui-logo {
+    width: var(--lnb-width);
+    padding: 10px;
+    border-right: 1px solid var(--grey700);
+    background-color: var(--primary);
+  }
+
+  .ui-gnb-wrap {
+    @include flexYCenter {
+      gap: 34px;
+    }
+    margin-left: 20px;
+
+    a {
+      font-size: var(--subtitle);
+      color: var(--white);
+
+      &.active {
+        color: var(--secondary-high);
+
+        &::before,
+        &::after {
+          width: 50%;
+          background-color: var(--secondary-high);
+        }
+      }
+    }
+  }
+
+  .ui-status-wrap {
+    padding: 0 20px;
+  }
+}
+
+// lnb
+.ui-lnb-wrap {
+  min-width: var(--lnb-width);
+  padding: 20px;
+  background-color: var(--grey200);
+  box-shadow: inset var(--z4);
+
+  .ui-lnb-inner {
+    @include flexColumn {
+      gap: 14px;
+    }
+
+    .link {
+      @include flexYCenter {
+        gap: 6px;
+      }
+      font-size: var(--bodyS);
+
+      &::before {
+        font-family: "fontawesome regular";
+        content: "\f07b";
+      }
+
+      &.active {
+        &::before {
+          content: "\f07c";
+        }
+      }
+    }
+  }
+}
+
+// contents
+.ui-contents-wrap {
+  --space: 16px;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+
+  &.inner-shadow {
+    box-shadow: rgb(209 209 209) 0px 0px 10px 2px inset;
+  }
+
+  &.max-width {
+    max-width: 1400px;
+  }
+
+  &.mid-width {
+    max-width: 1000px;
+  }
+
+  &.small-width {
+    max-width: 800px;
+  }
+
+  .ui-contents-inner {
+    @include scroll;
+    position: absolute;
+    left: var(--space);
+    right: var(--space);
+    top: var(--space);
+    bottom: var(--space);
+    overflow: auto;
+    margin-right: calc((var(--space)) / 2 * -1);
+    padding-right: calc(var(--space) / 2);
+  }
+}
+
+.layout-grid-wrap {
+  display: grid;
+
+  &.col-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// popup
+.layout-popup-wrap {
+  padding: 20px 15px;
+}

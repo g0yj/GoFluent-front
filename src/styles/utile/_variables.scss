@@ -1,0 +1,247 @@
+// image url
+$imgurl: "/assets/";
+
+// components
+// header
+$header-height: 70px;
+// lnb
+$lnb-width: 165px;
+
+// font-size
+$exsmall: 10px;
+$xsmall: 11px;
+$small: 12px;
+$bodyXS: 12px;
+$bodyS: 14px;
+$body: 15px;
+$subtitle: 16px;
+$subtitleL: 18px;
+$titleS: 20px;
+$title: 22px;
+$h3: 32px;
+$h2: 48px;
+$h1: 64px;
+
+$fontSize: (
+  "exsmall": $exsmall,
+  "xsmall": $xsmall,
+  "small": $small,
+  "bodyXS": $bodyXS,
+  "bodyS": $bodyS,
+  "body": $body,
+  "subtitle": $subtitle,
+  "subtitleL": $subtitleL,
+  "titleS": $titleS,
+  "title": $title,
+  "h3": $h3,
+  "h2": $h2,
+  "h1": $h1,
+);
+
+@each $semantic, $size in $fontSize {
+  .size-#{$semantic} {
+    font-size: $size;
+
+    @if ($semantic == "h3") {
+      font-weight: 700;
+    }
+    @if ($semantic == "h2" or $semantic == "h3") {
+      font-weight: 800;
+    }
+  }
+}
+
+// radius
+$radius: 4px;
+
+// genenal
+$black: #000;
+$black-70: rgba(0, 0, 0, 0.7);
+$black-90: rgba(0, 0, 0, 0.9);
+$white: #fff;
+$primary: #0056a6;
+$primary-deep: #084a88;
+$primary-high: #247dcf;
+$primary-soft: #b5d5f3;
+// $primary: #00adb5;
+// $primary-deep: #28787c;
+// $primary-high: #8be6eb;
+// $primary-soft: #ddf5fb;
+$secondary: #3f76dd;
+$secondary-high: #359be9;
+$secondary-soft: #daebff;
+$grey100: #f9fafb;
+$grey150: #f4f4f4;
+$grey200: #f3f4fa;
+$grey300: #dfe3e8;
+$grey400: #c4cdd5;
+$grey500: #919eab;
+$grey600: #637381;
+$grey700: #454f5b;
+$grey800: #212b36;
+$grey900: #161c24;
+$greydc: #dcdcdc;
+$error: #ff0000;
+$red: #cc4949;
+$error-deep: #d32e2e;
+$pink: #ff80ff;
+$green: #299143;
+$green-light: #00c632;
+$warning: #fd9444;
+$mainColor: #d9eafd;
+$subColor: #fffe9d;
+$standby: #ffffe0;
+$abs: rgba(230, 230, 250, 0.7);
+$wait: lightyellow;
+$completed: #eafef6;
+
+$ok: #eafef6;
+$ok-color: #83af0e;
+$no: #ffefdf;
+$no-color: red;
+$res: #d9eafd;
+$res-color: blue;
+$res-cancel: #ceceeb;
+
+$blueColor: #0000CD;
+
+// 상담
+$c-green: #eafef6;
+$c-yellow: #ffffe0;
+$c-orange: #FFEFDF;
+
+$colors: (
+  "black": $black,
+  "black-70": $black-70,
+  "black-90": $black-90,
+  "white": $white,
+  "primary": $primary,
+  "primary-deep": $primary-deep,
+  "primary-high": $primary-high,
+  "primary-soft": $primary-soft,
+  "secondary": $secondary,
+  "secondary-high": $secondary-high,
+  "secondary-soft": $secondary-soft,
+  "grey100": $grey100,
+  "grey150": $grey150,
+  "grey200": $grey200,
+  "grey300": $grey300,
+  "grey400": $grey400,
+  "grey500": $grey500,
+  "grey600": $grey600,
+  "grey700": $grey700,
+  "grey800": $grey800,
+  "grey900": $grey900,
+  "greydc": $greydc,
+  "error": $error,
+  "red": $red,
+  "error-deep": $error-deep,
+  "pink": $pink,
+  "green-light": $green-light,
+  "warning": $warning,
+  "mainColor": $mainColor,
+  "subColor": $subColor,
+  "standby": $standby,
+  "abs": $abs,
+  "wait": $wait,
+  "completed": $completed,
+  "ok": $ok,
+  "ok-color": $ok-color,
+  "no": $no,
+  "no-color": $no-color,
+  "res": $res,
+  "res-color": $res-color,
+  "res-cancel": $res-cancel,
+
+  "blueColor": $blueColor,
+
+  "c-green": $c-green,
+  "c-yellow": $c-yellow,
+  "c-orange": $c-orange,
+);
+
+@each $semantic, $color in $colors {
+  .txt-#{$semantic} {
+    color: $color;
+  }
+  .bgc-#{$semantic} {
+    background-color: $color !important;
+  }
+}
+
+:root {
+  --header-height: #{$header-height};
+  --lnb-width: #{$lnb-width};
+
+  // radius
+  --radius: #{$radius};
+
+  // color
+  --black: #{$black};
+  --black-70: #{$black-70};
+  --black-90: #{$black-90};
+  --white: #{$white};
+  --primary: #{$primary};
+  --primary-deep: #{$primary-deep};
+  --primary-high: #{$primary-high};
+  --primary-soft: #{$primary-soft};
+  --secondary: #{$secondary};
+  --secondary-high: #{$secondary-high};
+  --secondary-soft: #{$secondary-soft};
+  --grey100: #{$grey100};
+  --grey150: #{$grey150};
+  --grey200: #{$grey200};
+  --grey300: #{$grey300};
+  --grey400: #{$grey400};
+  --grey500: #{$grey500};
+  --grey600: #{$grey600};
+  --grey700: #{$grey700};
+  --grey800: #{$grey800};
+  --grey900: #{$grey900};
+  --greydc: #{$greydc};
+  --error: #{$error};
+  --red: #{$red};
+  --error-deep: #{$error-deep};
+  --pink: #{$pink};
+  --green-light: #{$green-light};
+  --warning: #{$warning};
+  --main-color: #{$mainColor};
+  --sub-color: #{$subColor};
+  --standby: #{$standby};
+  --abs: #{$abs};
+  --completed: #{$completed};
+  --ok: #{$ok};
+  --ok-color: #{$ok-color};
+  --no: #{$no};
+  --no-color: #{$no-color};
+  --res: #{$res};
+  --res-color: #{$res-color};
+  --res-cancel: #{$res-cancel};
+
+  --blueColor: #{$blueColor};
+
+  --c-green: #{c-green};
+  --c-yellow: #{c-yellow};
+  --c-orange: #{c-orange};
+
+  // font size
+  --exsmall: #{$exsmall};
+  --xsmall: #{$xsmall};
+  --small: #{$small};
+  --bodyXS: #{$bodyXS};
+  --bodyS: #{$bodyS};
+  --body: #{$body};
+  --subtitle: #{$subtitle};
+  --subtitleL: #{$subtitleL};
+  --titleS: #{$titleS};
+  --title: #{$title};
+  --h3: #{$h3};
+  --h2: #{$h2};
+  --h1: #{$h1};
+
+  // effect
+  --z4: 0px 0px 20px 0px rgba(145, 158, 171, 0.25);
+  --z8: 0px 4px 15px 0px rgba(0, 0, 0, 0.15);
+  --card: 0px 12px 24px -4px rgba(0, 0, 0, 0.12), 0px 0px 2px 0px rgba(0, 0, 0, 0.2);
+  --popup: -40px 40px 80px -8px rgba(0, 0, 0, 0.24);
+}
