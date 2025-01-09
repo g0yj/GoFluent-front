@@ -113,7 +113,7 @@ const MemberManagementContents = () => {
     setMemberList(data.list); // 회원 목록 표시용
   }, [makeSearchCondition, paginationData]);
 
-  //담당강사 호출
+  //담당멘토 호출
   const getTeacherList = useCallback(async () => {
     const res = await ServiceTeacher.getTeacherOptionsList({ fields: TeacherType[0].id });
     setTeacherList(res.teachers);
@@ -475,8 +475,6 @@ const MemberManagementContents = () => {
                           <option value="name">이름</option>
                           <option value="loginId">아이디</option>
                           <option value="email">이메일</option>
-                          <option value="company">회사/직장명</option>
-                          <option value="phone">전화번호</option>
                           <option value="cellPhone">휴대전화번호</option>
                         </select>
                       </button>
@@ -552,7 +550,6 @@ const MemberManagementContents = () => {
                   <th onClick={() => onClickSort(`email`)}>이메일</th>
                   <th onClick={() => onClickSort(`endDate`)}>수강 만료일</th>
                   <th onClick={() => onClickSort(`remainCount`)}>잔여</th>
-                  <th>미부킹</th>
                   <th>
                     <input
                       type="checkbox"
@@ -605,7 +602,6 @@ const MemberManagementContents = () => {
 
                       <td>{member?.expirationDate}</td>
                       <td>{member?.remainingCount}</td>
-                      <td className="txt-error">{member?.notBook}</td>
                       <td>
                         <input
                           type="checkbox"

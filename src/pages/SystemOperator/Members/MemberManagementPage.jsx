@@ -15,22 +15,22 @@ const MemberManagementPage = () => {
         <div className="ui-lnb-inner">
           <NavLink
             className="link"
-            to="/admin/operator/members/member"
-            onClick={() => onRefresh("/admin/operator/members/member")}
+            to="/operator/members/member"
+            onClick={() => onRefresh("/operator/members/member")}
           >
             회원관리
           </NavLink>
           <NavLink
             className="link"
-            to="/admin/operator/members/academicReport"
-            onClick={() => onRefresh("/admin/operator/members/academicReport")}
+            to="/operator/members/academicReport"
+            onClick={() => onRefresh("/operator/members/academicReport")}
           >
             학사보고서
           </NavLink>
           <NavLink
             className="link"
-            to="/admin/operator/members/consult"
-            onClick={() => onRefresh("/admin/operator/members/consult")}
+            to="/operator/members/consult"
+            onClick={() => onRefresh("/operator/members/consult")}
           >
             상담관리
           </NavLink>

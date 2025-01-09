@@ -583,7 +583,7 @@ const MemberForm = ({ data }) => {
         </table>
       </div>
 
-      <div className="ui-sub-title sp-mt-14">
+          <div className="ui-sub-title sp-mt-14">
         <div className="title">
           <div className="tit-wrap">
             <div className="tit">부가정보</div>
@@ -693,6 +693,7 @@ const MemberForm = ({ data }) => {
         </div>
       </div>
     </div>
+    
   );
 };
 

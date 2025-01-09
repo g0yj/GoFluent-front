@@ -444,94 +444,8 @@ const ConsultManagementList = ({
                     </Buttons>
                   </div>
                 </td>
-                <th>방문예약일</th>
-                <td>
-                  <div className="flexYCenter gap">
-                    <div className="ui-datepicker-wrap">
-                      <div>
-                        <DatePicker
-                          selected={searchData?.visitStartDate}
-                          onChange={(date) => onSearchDataChange({ visitStartDate: date })}
-                          selectStart
-                          startDate={searchData?.visitStartDate}
-                          endDate={searchData?.visitEndDate}
-                        ></DatePicker>
-                      </div>
-                      <div className="txt-grey500">~</div>
-                      <div>
-                        <DatePicker
-                          selected={searchData?.visitEndDate}
-                          onChange={(date) => onSearchDataChange({ visitEndDate: date })}
-                          selectStart
-                          startDate={searchData?.visitStartDate}
-                          endDate={searchData?.visitEndDate}
-                        ></DatePicker>
-                      </div>
-                    </div>
-
-                    <Buttons
-                      className="ui-button outlined xsmall"
-                      onClick={() =>
-                        onSearchDataChange({ visitStartDate: null, visitEndDate: null })
-                      }
-                    >
-                      Clear
-                    </Buttons>
-                    <Buttons
-                      className="ui-button outlined xsmall"
-                      onClick={() =>
-                        onSearchDataChange({
-                          visitStartDate: new Date(
-                            new Date().getFullYear(),
-                            new Date().getMonth(),
-                            1
-                          ),
-                          visitEndDate: new Date(
-                            new Date().getFullYear(),
-                            new Date().getMonth() + 1,
-                            0
-                          ),
-                        })
-                      }
-                    >
-                      당월
-                    </Buttons>
-                    <Buttons
-                      className="ui-button outlined xsmall"
-                      onClick={() =>
-                        onSearchDataChange({
-                          visitStartDate: new Date(
-                            new Date().getFullYear(),
-                            new Date().getMonth() - 1,
-                            1
-                          ),
-                          visitEndDate: new Date(
-                            new Date().getFullYear(),
-                            new Date().getMonth(),
-                            0
-                          ),
-                        })
-                      }
-                    >
-                      전달
-                    </Buttons>
-                    <Buttons
-                      className="ui-button outlined xsmall"
-                      onClick={() =>
-                        onSearchDataChange({
-                          visitStartDate: new Date(new Date().getFullYear(), 0, 1),
-                          visitEndDate: new Date(new Date().getFullYear(), 11, 31),
-                        })
-                      }
-                    >
-                      금년
-                    </Buttons>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th>상담구분</th>
-                <td>
+                <th>처리상태</th>
+                 <td>
                   <div className="ui-select">
                     <select
                       className="input-init"
@@ -547,24 +461,8 @@ const ConsultManagementList = ({
                     </select>
                   </div>
                 </td>
-                <th>처리상태</th>
-                <td>
-                  <div className="ui-select">
-                    <select
-                      className="input-init"
-                      value={searchData?.status}
-                      onChange={({ target: { value } }) => onSearchDataChange({ status: value })}
-                    >
-                      <option value="">-선택-</option>
-                      {consultationsStatus?.map((item) => (
-                        <option key={item.code} value={item.code}>
-                          {item.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </td>
               </tr>
+             
               <tr>
                 <th>검색구분</th>
                 <td>
@@ -1006,8 +904,8 @@ const CreateConsult = ({ selectedData, consultationsStatus, consultationsType, g
               </colgroup>
               <tbody>
                 <tr>
-                  <th>
-                    상담구분<i className="require">*</i>
+                   <th>
+                    처리상태 <i className="require">*</i>
                   </th>
                   <td>
                     <select
@@ -1027,25 +925,7 @@ const CreateConsult = ({ selectedData, consultationsStatus, consultationsType, g
                   <th>상담직원</th>
                   <td>{loginUser.name || data?.modifiedName}</td>
                 </tr>
-                <tr>
-                  <th>
-                    처리상태 <i className="require">*</i>
-                  </th>
-                  <td colSpan={3}>
-                    <select
-                      className="input-init"
-                      value={data?.status}
-                      onChange={({ target: { value } }) => onChangeData({ status: value })}
-                    >
-                      <option value="">-선택-</option>
-                      {consultationsStatus.map((item) => (
-                        <option key={item.code} value={item.code}>
-                          {item.name}
-                        </option>
-                      ))}
-                    </select>
-                  </td>
-                </tr>
+    
                 <tr>
                   <th>
                     성명 <i className="require">*</i>
@@ -1183,67 +1063,10 @@ const CreateConsult = ({ selectedData, consultationsStatus, consultationsType, g
                 <col />
               </colgroup>
               <tbody>
-                <tr>
-                  <th>
-                    알게된 동기 <i className="require">*</i>
-                  </th>
-                  <td>
-                    <div className="flexYCenter gap">
-                      <select
-                        className="input-init"
-                        value={data?.foundPath}
-                        onChange={({ target: { value } }) => onChangeData({ foundPath: value })}
-                      >
-                        <option value="">-선택-</option>
 
-                        <option value="SIGN">간판</option>
-
-                        <option value="ONLINE">온라인검색</option>
-
-                        <option value="RECOMMEND">지인추천</option>
-
-                        <option value="FAN">부채</option>
-
-                        <option value="LEAFLET">3단리플릿</option>
-
-                        <option value="SUBWAY">지하철광고</option>
-
-                        <option value="ALLIANCE">기업제휴</option>
-
-                        <option value="ETC">기타</option>
-                      </select>
-
-                      <input
-                        type="text"
-                        className="input-init"
-                        value={data?.foundPathNote}
-                        onChange={({ target: { value } }) => onChangeData({ foundPathNote: value })}
-                      />
-                    </div>
-                  </td>
-                  <th>직업</th>
-                  <td>
-                    <input
-                      type="text"
-                      className="input-init"
-                      style={{ width: 100 }}
-                      value={data?.job}
-                      onChange={({ target: { value } }) => onChangeData({ job: value })}
-                    />{" "}
-                    ( 회사명:{" "}
-                    <input
-                      type="text"
-                      className="input-init"
-                      style={{ width: 100 }}
-                      value={data?.company}
-                      onChange={({ target: { value } }) => onChangeData({ company: value })}
-                    />{" "}
-                    )
-                  </td>
-                </tr>
                 <tr>
                   <th>상담일시</th>
-                  <td>
+                  <td colSpan={3}>
                     <div className="flexYCenter gap">
                       <div className="ui-datepicker-wrap">
                         <div>
@@ -1276,40 +1099,7 @@ const CreateConsult = ({ selectedData, consultationsStatus, consultationsType, g
                       </div>
                     </div>
                   </td>
-                  <th>방문예약</th>
-                  <td>
-                    <div className="flexYCenter gap">
-                      <div className="ui-datepicker-wrap">
-                        <div>
-                          <ReactDatePicker
-                            dateFormat="YYYY-MM-dd HH:mm"
-                            showTimeSelect
-                            selected={data?.visitDate ? dayjs(data.visitDate, 'YYYY-MM-dd HH:mm').toDate() : null}
-                            timeIntervals={5}
-                            onChange={(date) =>
-                              onChangeData({
-                                visitDate: dayjs(date).second(0).toDate(),
-                              })
-                            }
-                            dayClassName={(date) =>
-                              dayjs(date).day() === 6
-                                ? "saturday"
-                                : dayjs(date).day() === 0
-                                ? "sunday"
-                                : null
-                            }
-                            customInput={
-                              <input
-                                style={{
-                                  width: "130px", // 원하는 너비
-                                }}
-                              />
-                            }
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </td>
+   
                 </tr>
                 <tr>
                   <th>상담내용</th>
@@ -1324,7 +1114,7 @@ const CreateConsult = ({ selectedData, consultationsStatus, consultationsType, g
                 </tr>
                 <tr>
                   <th>첨부파일</th>
-                  <td>
+                  <td colSpan={3}>
                     <Buttons
                       className="input-file outlined mid2"
                       onClick={() => fileRef.current.click()}
