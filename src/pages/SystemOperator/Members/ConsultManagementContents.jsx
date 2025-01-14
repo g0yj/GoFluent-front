@@ -118,17 +118,9 @@ const ConsultManagementContents = () => {
         createDateTo: searchData?.createEndDate
           ? dayjs(searchData?.createEndDate).format("YYYY-MM-DD")
           : null,
-        visitDateFrom: searchData?.visitStartDate
-          ? dayjs(searchData?.visitStartDate).format("YYYY-MM-DD")
-          : null,
-        visitDateTo: searchData?.visitEndDate
-          ? dayjs(searchData?.visitEndDate).format("YYYY-MM-DD")
-          : null,
-        consultationType: searchData?.type || [],
         status: searchData?.status || null,
         search: searchData.search,
         keyword: searchData?.keyword || null,
-        type: searchData.type,
         limit: searchData?.limit || "20",
       };
       console.log("onSearch ==>", saveData);
@@ -151,15 +143,8 @@ const ConsultManagementContents = () => {
         createDateTo: searchData?.createEndDate
           ? dayjs(searchData?.createEndDate).format("YYYY-MM-DD")
           : null,
-        visitDateFrom: searchData?.visitStartDate
-          ? dayjs(searchData?.visitStartDate).format("YYYY-MM-DD")
-          : null,
-        visitDateTo: searchData?.visitEndDate
-          ? dayjs(searchData?.visitEndDate).format("YYYY-MM-DD")
-          : null,
         status: searchData.status,
         search: searchData.search,
-        type: searchData.type,
         order: searchData.order,
         direction: searchData.direction,
         page: paginationData.page,
@@ -180,10 +165,6 @@ const ConsultManagementContents = () => {
     searchData?.createEndDate,
     searchData?.createStartDate,
     searchData?.status,
-    searchData?.type,
-    searchData?.visitDateFrom,
-    searchData?.visitDateTo,
-    searchData?.consultationType,
     searchData?.limit,
     searchData?.order,
     searchData?.direction,
@@ -226,7 +207,6 @@ const ConsultManagementContents = () => {
 
   useEffect(() => {
     getStatus();
-    getType();
   }, []);
 
   return (
@@ -235,7 +215,6 @@ const ConsultManagementContents = () => {
         <CreateConsult
           selectedData={selectedData}
           consultationsStatus={consultationsStatus}
-          consultationsType={consultationsType}
           goBack={goBack}
           navigate={navigate}
         />
@@ -243,7 +222,6 @@ const ConsultManagementContents = () => {
         <ConsultManagementList
           dataList={dataList}
           consultationsStatus={consultationsStatus}
-          consultationsType={consultationsType}
           searchData={searchData}
           isExpanded={isExpanded}
           paginationData={paginationData}
@@ -269,7 +247,6 @@ const ConsultManagementContents = () => {
 const ConsultManagementList = ({
   dataList,
   consultationsStatus,
-  consultationsType,
   searchData,
   isExpanded,
   isSelectedAll,
@@ -449,15 +426,10 @@ const ConsultManagementList = ({
                   <div className="ui-select">
                     <select
                       className="input-init"
-                      value={searchData?.type || ""}
-                      onChange={({ target: { value } }) => onSearchDataChange({ type: value })}
+                      value={searchData?.status || ""}
+                      onChange={({ target: { value } }) => onSearchDataChange({ status: value })}
                     >
                       <option value="">-선택-</option>
-                      {consultationsType?.map((item) => (
-                        <option key={item.code} value={item.code}>
-                          {item.name}
-                        </option>
-                      ))}
                     </select>
                   </div>
                 </td>
@@ -554,13 +526,10 @@ const ConsultManagementList = ({
             <thead>
               <tr>
                 <th>No</th>
-                <th onClick={() => sortHeader('type')}>상담구분</th>
                 <th onClick={() => sortHeader('status')}>처리상태</th>
                 <th onClick={() => sortHeader('name')}>성명</th>
                 <th onClick={() => sortHeader('cellPhone')}>전화번호</th>
-                <th onClick={() => sortHeader('company')}>직장/학교</th>
                 <th onClick={() => sortHeader('callTime')}>통화가능시간</th>
-                <th onClick={() => sortHeader('visitDate')}>방문예약</th>
                 <th onClick={() => sortHeader('createdBy')}>등록일시</th>
                 <th onClick={() => sortHeader('modifiedBy')}>상담직원</th>
                 <th onClick={() => sortHeader('details')}>상담내용</th>
@@ -578,12 +547,7 @@ const ConsultManagementList = ({
               {dataList?.map((data, index) => (
                 <tr key={data.id} className={getStatusColor(data)}>
                   <td>{(totalCount - (paginationData.page -1) * 20) - index}</td>
-                  <td>{consultationsType?.find((item) => item.code === data.type)?.name}</td>
-                  <td>
-                    <strong className={getStatusFontColor(data)}>
-                      {consultationsStatus.find((item) => item.code === data.status)?.name}
-                    </strong>
-                  </td>
+                 <td>{data.status}</td>
                   <td>
                     <Buttons className="ui-link secondary-high" onClick={() => onSelected(data)}>
                       {data.name}
@@ -596,23 +560,8 @@ const ConsultManagementList = ({
                       : ""}
                     </Buttons>
                   </td>
-                  <td>{data.company}</td>
                   <td>{ConsultationsCallTime.find((item) => item.key === data.callTime)?.title}</td>
-                  {data.visitDate ? (
-                    <td>
-                      {checkVisitDateColor(data.visitDate) ? (
-                        <strong className="txt-red">{`${dayjs(data.visitDate).format('YYYY-MM-DD HH:mm')} (${dayjs(
-                          data.visitDate
-                        ).format("ddd")})`}</strong>
-                      ) : (
-                        <strong>{`${data.visitDate} (${dayjs(data.visitDate).format(
-                          "ddd"
-                        )})`}</strong>
-                      )}
-                    </td>
-                  ) : (
-                    <td />
-                  )}
+                
                   <td>{dayjs(data.createdOn).format("YYYY-MM-DD HH:mm")}</td>
                   <td>{data.creatorName}</td>
                   <td className="text-left" style={{ maxWidth: 300, position: 'relative' }}>
@@ -655,7 +604,9 @@ const ConsultManagementList = ({
   );
 };
 
-const CreateConsult = ({ selectedData, consultationsStatus, consultationsType, goBack, navigate }) => {
+
+
+const CreateConsult = ({ selectedData, consultationsStatus, goBack, navigate }) => {
   const loginUser = useSelector((state) => state.loginUser);
 
   const [data, setData] = useState({});
@@ -729,11 +680,9 @@ const CreateConsult = ({ selectedData, consultationsStatus, consultationsType, g
 
         // 필수값 체크
         if (
-          (key === "type" && data[key] === "") ||
           (key === "status" && data[key] === "") ||
           (key === "name" && data[key] === "") ||
-          (key === "cellPhone" && data[key] === "") ||
-          (key === "foundPath" && data[key] === "")
+          (key === "cellPhone" && data[key] === "") 
         ) {
           alert("필수값을 입력해 주세요.");
           return;
@@ -760,7 +709,7 @@ const CreateConsult = ({ selectedData, consultationsStatus, consultationsType, g
   };
   const onDeleteClick = async () => {
     try {
-      if (window.confirm("삭제 하시겠습니까??")) {
+      if (window.confirm("삭제 하시겠습니까?")) {
         await ServiceConsultations.deleteConsult(data.id);
 
         goBack();
@@ -910,16 +859,13 @@ const CreateConsult = ({ selectedData, consultationsStatus, consultationsType, g
                   <td>
                     <select
                       className="input-init"
-                      defaultValue={data?.type}
-                      value={data?.type || ""}
-                      onChange={({ target: { value } }) => onChangeData({ type: value })}
+                      defaultValue={data?.status}
+                      value={data?.status || ""}
+                      onChange={({ target: { value } }) => onChangeData({ status: value })}
                     >
                       <option value="">-선택-</option>
-                      {consultationsType?.map((item) => (
-                        <option key={item.code} value={item.code}>
-                          {item.name}
-                        </option>
-                      ))}
+                      <option value="대기">대기</option>
+                      <option value="완료">완료</option>
                     </select>
                   </td>
                   <th>상담직원</th>

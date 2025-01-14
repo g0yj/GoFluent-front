@@ -2,13 +2,14 @@ import useMemberRegistWindow from "@/app/helper/windows-hooks/use-member-regist-
 import Buttons from "@/components/Buttons";
 import { useEffect, useState } from "react";
 import { useDaumPostcodePopup } from "react-daum-postcode";
+import ServiceMember from "@/app/service/service-members";
 import { useNavigate } from "react-router-dom";
-import ServiceConsultations from "@/app/service/service-consultations";
+import ServiceResv from "@/app/service/service-resv";
 
 const MemberRegistModal = () => {
 
     const navigate = useNavigate();
-    const { member, isClose, setNewState } = useMemberRegistWindow();
+    const { member } = useMemberRegistWindow();
     const [name, setName] = useState('');
     const [id, setId] = useState('');
     const [email, setEmail] = useState('');
@@ -96,15 +97,10 @@ const MemberRegistModal = () => {
             languageSkills: languageSkills,
             type: 'S',
         }
-
-        try {
-            await ServiceConsultations.registerConsultUser(member.id, data);
-            // alert("신규 회원이 등록되었습니다.");
-            setNewState(true);
-            window.close();
-        } catch (error) {
-            console.error(error);
-        }
+        
+        await ServiceMember.register(data);
+        alert("신규 회원이 등록되었습니다.");
+        window.close();
         // navigate("/operator/members/member", { replace: true });
     }
 
@@ -153,8 +149,7 @@ const MemberRegistModal = () => {
                                     placeholder="이름"
                                     required
                                     value={name}
-                                    readOnly
-                                    // onChange={(e) => {setName(e.target.value), handleChange({name: e.target.value})}}
+                                    onChange={(e) => {setName(e.target.value), handleChange({name: e.target.value})}}
                                 />
                             </td>
                         </tr>
@@ -203,8 +198,7 @@ const MemberRegistModal = () => {
                                         placeholder="이메일"
                                         required
                                         value={email}
-                                        readOnly
-                                        // onChange={(e) => {setEmail(e.target.value), handleChange({email: e.target.value})}}
+                                        onChange={(e) => {setEmail(e.target.value), handleChange({email: e.target.value})}}
                                     />
                                     <span className="flexYCenter sp-mt-1">
                                         <input type="checkbox" onChange={(e) => handleChange({isReceiveEmail: e.target.checked})}/>
@@ -241,8 +235,7 @@ const MemberRegistModal = () => {
                                             value="M"
                                             required
                                             checked={gender === "M"}
-                                            readOnly
-                                            // onChange={(e) => {setGender(e.target.value), handleChange({gender: e.target.value})}}
+                                            onChange={(e) => {setGender(e.target.value), handleChange({gender: e.target.value})}}
                                         />
                                         <label htmlFor="male">남</label>
                                     </div>
@@ -254,8 +247,7 @@ const MemberRegistModal = () => {
                                             value="F"
                                             required
                                             checked={gender === "F"}
-                                            readOnly
-                                            // onChange={(e) => {setGender(e.target.value), handleChange({gender: e.target.value})}}
+                                            onChange={(e) => {setGender(e.target.value), handleChange({gender: e.target.value})}}
                                         />
                                         <label htmlFor="female">여</label>
                                     </div>
@@ -310,8 +302,7 @@ const MemberRegistModal = () => {
                                         style={{ width: 124 }}
                                         required
                                         value={cellPhone}
-                                        readOnly
-                                        // onChange={(e) => {setCellPhone(e.target.value), handleChange({cellPhone: e.target.value})}}
+                                        onChange={(e) => {setCellPhone(e.target.value), handleChange({cellPhone: e.target.value})}}
                                         maxLength="13"
                                     />
                                     <span className="flexYCenter sp-mt-1">
@@ -410,8 +401,7 @@ const MemberRegistModal = () => {
                                 <select
                                     className="input-init"
                                     value={foundPath}
-                                    disabled
-                                    // onChange={(e) => {setFoundPath(e.target.value), handleChange({joinPath: e.target.value})}}
+                                    onChange={(e) => {setFoundPath(e.target.value), handleChange({joinPath: e.target.value})}}
                                 >
                                 <option value="">-선택-</option>
                                 <option value="SIGN">간판</option>
