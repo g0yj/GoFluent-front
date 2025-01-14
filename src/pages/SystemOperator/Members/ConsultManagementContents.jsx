@@ -728,7 +728,7 @@ const CreateConsult = ({ selectedData, consultationsStatus, goBack, navigate }) 
       const formData = new FormData();
       for (let key in data) {
         if (key !== "file" || key !== "isDeleteFile") {
-          if (key === "consultationDate" || key === "visitDate") {
+          if (key === "consultationDate") {
             formData.append(key, dayjs(data[key]).format("YYYY-MM-DD HH:mm:ss"));
           } else {
             formData.append(key, data[key]);
@@ -737,8 +737,10 @@ const CreateConsult = ({ selectedData, consultationsStatus, goBack, navigate }) 
       }
 
       if (data?.file?.[0].name) {
+        formData.delete("file");
         formData.append("file", data?.file[0]);
       }
+
       formData.delete("id");
 
       await ServiceConsultations.createConsult(formData);
